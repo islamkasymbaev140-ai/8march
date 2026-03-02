@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>c уосмой марта!</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9ecf, #ffc3e6);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Карточка */
+.card {
+    width: 90%;
+    max-width: 380px;
+    height: 220px;
+    background: #ffe3ed;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.8s ease;
+    padding: 15px;
+}
+
+.card.open {
+    height: auto;
+    background: #fff0f5;
+    box-shadow: 0 0 40px rgba(255,255,255,0.6);
+}
+
+/* Сообщение */
+.message {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.8s ease;
+    font-size: 1rem;
+    color: #d6006c;
+    line-height: 1.5;
+}
+
+.message.show {
+    opacity: 1;
+    max-height: 300px;
+    margin-top: 15px;
+}
+
+/* Падающие элементы */
+.sakura, .heart-fall {
+    position: fixed;
+    top: -10px;
+    animation: fall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(110vh) translateX(30px); }
+}
+
+/* Адаптация под маленькие телефоны */
+@media (max-width: 480px) {
+    .card {
+        max-width: 95%;
+        height: 200px;
+    }
+    .message {
+        font-size: 0.9rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <span id="hint">нажми сюда🌸)</span>
+    <div class="message" id="message">
+        С праздником 8 Марта!<br>
+        будь красиво, как все цветы мира(хотя ты и так красива)! желаю тебе всего наилучшего, ну и все! 💖
+    </div>
+</div>
+
+<script>
+// Сакура
+for (let i = 0; i < 15; i++) {
+    let sakura = document.createElement("div");
+    sakura.className = "sakura";
+    sakura.innerHTML = "🌸";
+    sakura.style.left = Math.random() * 100 + "vw";
+    sakura.style.animationDuration = (6 + Math.random() * 5) + "s";
+    sakura.style.fontSize = (12 + Math.random() * 10) + "px";
+    document.body.appendChild(sakura);
+}
+
+// Сердечки
+for (let i = 0; i < 12; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart-fall";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.fontSize = (12 + Math.random() * 12) + "px";
+    document.body.appendChild(heart);
+}
+
+// Открытие карточки
+const card = document.getElementById("card");
+const message = document.getElementById("message");
+const hint = document.getElementById("hint");
+
+card.addEventListener("click", () => {
+    card.classList.add("open");
+    message.classList.add("show");
+    hint.style.display = "none";
+});
+</script>
+
+</body>
+</html>
